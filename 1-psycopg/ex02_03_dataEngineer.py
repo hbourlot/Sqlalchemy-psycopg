@@ -104,15 +104,22 @@ def main() -> None:
                     _create_table(cur, csv_path.stem)
                     _load_csv(cur, csv_path.stem, csv_path)
 
+            # Quick check: row count and first row of each loaded table
             with conn.cursor() as src:
-                # src.execute(f"SELECT * FROM {main_table} LIMIT 10")
-                # src.execute(
-                #     sql.SQL("SELECT COUNT(*) FROM {}").format(
-                #         sql.Identifier(main_table)
-                #     )
-                # )
+                for csv_path in all_tables:
+                    src.execute(
+                        sql.SQL("SELECT COUNT(*) FROM {}").format(
+                            sql.Identifier(csv_path.stem)
+                        )
+                    )
+                    print(f"{csv_path.stem}: {src.fetchone()[0]} rows")
 
-                print(src.fetchmany(1))
+                src.execute(
+                    sql.SQL("SELECT * FROM {} LIMIT 1").format(
+                        sql.Identifier(all_tables[0].stem)
+                    )
+                )
+                print(src.fetchone())
 
         except pg.Error as e:
             print(f"{type(e).__name__} : {e}")
