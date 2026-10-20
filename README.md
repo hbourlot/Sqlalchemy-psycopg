@@ -43,8 +43,10 @@ Needs Docker and Python 3 with psycopg 3.
    cd 1-psycopg && python 01_connect.py
    ```
 
-The `csv/` folder (not in git) must sit next to `docker-compose.yml`; put the
-piscine CSVs in `csv/customer/` and `csv/item/`.
+The CSV data is not in git. Put the piscine CSVs in `csv/customer/` and
+`csv/item/`, next to `docker-compose.yml`. Both containers mount it with the
+relative path `./csv/:/data`. If your CSVs live somewhere else, change that
+path in `docker-compose.yml` (services `postgres` and `pgadmin`).
 
 ## Connection
 
