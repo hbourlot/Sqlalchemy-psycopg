@@ -4,14 +4,14 @@ Learning Postgres from Python, bottom up: the raw driver first (psycopg 3),
 then SQLAlchemy Core, then the ORM, then transactions and performance.
 The data is the e-commerce event dataset from the 42 Data Science piscine.
 
-The full plan, the roadmaps and my notes are in my Obsidian vault, folder
-`Sqlalchemy+psycopg/` (`Study plan`, `Psycopg roadmap`, `Psycopg`).
+The full plan, the roadmaps and my notes live in my private Obsidian vault
+(`Study plan`, `Psycopg roadmap`, `Psycopg`), so they are not in this repo.
 
 ## Progress
 
 | Stage | Folder | Status |
 | --- | --- | --- |
-| 1. psycopg | [1-psycopg/](1-psycopg/) | in progress (phase 2 of 10) |
+| 1. psycopg | [1-psycopg/](1-psycopg/) | in progress (phase 10 of 10: small project) |
 | 2. SQLAlchemy Core | `2-sqlalchemy-core/` | not started |
 | 3. SQLAlchemy ORM | `3-sqlalchemy-orm/` | not started |
 | 4. Transactions and performance | `4-performance/` | not started |
@@ -22,7 +22,12 @@ The full plan, the roadmaps and my notes are in my Obsidian vault, folder
 Needs Docker and Python 3 with psycopg 3.
 
 1. Create the two secret files next to `docker-compose.yml`, each holding just
-   a password: `db_password.txt` and `pgadmin_password.txt` (copy the `.example` files).
+   a password. They are not in git; start from the examples:
+
+   ```bash
+   cp db_password.txt.example db_password.txt
+   cp pgadmin_password.txt.example pgadmin_password.txt
+   ```
 
 2. Start Postgres and pgAdmin:
 
@@ -94,5 +99,6 @@ WITH (FORMAT csv, HEADER);
 ## Rules
 
 - One numbered file per concept, one note per stage in the Obsidian vault.
-- Practice tables are named `practice_*`. The `data_*` tables are read-only.
+- Practice tables are named `practice_*`. The `data_*` tables are only
+  (re)created by the exercise scripts (`ex*.py`), never edited by hand.
 - A stage is done when its checkpoint works without help.
