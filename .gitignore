@@ -1,0 +1,6 @@
+csv/
+.vscode/
+__pycache__/
+.DS_Store
+db_password.txt
+pgadmin_password.txt

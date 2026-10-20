@@ -1,0 +1,43 @@
+services:
+    postgres:
+        image: postgres:16
+        container_name: postgres-42
+        environment:
+            POSTGRES_DB: piscineds
+            POSTGRES_USER: hbourlot
+            POSTGRES_PASSWORD_FILE: /run/secrets/db_password
+        secrets:
+            - db_password
+        ports:
+            - "4242:5432"
+        volumes:
+            - postgres_data:/var/lib/postgresql/data
+            - ./csv/:/data
+    pgadmin:
+        image: dpage/pgadmin4:latest
+        container_name: pgadmin-42
+        environment:
+            PGADMIN_DEFAULT_EMAIL: admin@example.com
+            PGADMIN_DEFAULT_PASSWORD_FILE: /run/secrets/pgadmin_password
+            PGADMIN_CONFIG_SERVER_MODE: "False" # Make not ignore data file anymore by saving pgAdmin out of server mode
+            # PGADMIN_CONFIG_MASTER_PASSWORD_REQUIRED: "False"
+        secrets:
+            - pgadmin_password
+        ports:
+            - "8080:80"
+        volumes:
+            - pgadmin_data:/var/lib/pgadmin
+            - ./csv/:/data:ro
+
+        depends_on:
+            - postgres
+
+secrets:
+    db_password:
+        file: ./db_password.txt
+    pgadmin_password:
+        file: ./pgadmin_password.txt
+
+volumes:
+    postgres_data:
+    pgadmin_data:
