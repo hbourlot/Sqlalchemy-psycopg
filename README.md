@@ -5,21 +5,32 @@ then SQLAlchemy Core, then the ORM, then transactions and performance.
 The data is the e-commerce event dataset from the 42 Data Science piscine.
 
 The full plan, the roadmaps and my notes live in my private Obsidian vault
-(`Study plan`, `Psycopg roadmap`, `Psycopg`), so they are not in this repo.
+(`Study plan`, `Psycopg roadmap`, `Core roadmap`, one note per phase), so they
+are not in this repo.
 
 ## Progress
 
 | Stage | Folder | Status |
 | --- | --- | --- |
-| 1. psycopg | [1-psycopg/](1-psycopg/) | in progress (phase 10 of 10: small project) |
-| 2. SQLAlchemy Core | `2-sqlalchemy-core/` | not started |
+| 1. psycopg | [1-psycopg/](1-psycopg/) | done |
+| 2. SQLAlchemy Core | [2-sqlalchemy-core/](2-sqlalchemy-core/) | in progress (phase 4 of 10: create_all and drop_all) |
 | 3. SQLAlchemy ORM | `3-sqlalchemy-orm/` | not started |
 | 4. Transactions and performance | `4-performance/` | not started |
 | 5. Final project (optional) | `5-project/` | not started |
 
+### Stage 2: SQLAlchemy Core
+
+| File | Phase |
+| --- | --- |
+| `01_engine.py` | `create_engine`, `URL.create`, the lazy engine |
+| `02_connections.py` | `connect()` vs `begin()`, `Result`, rows |
+| `03_tables.py` | `MetaData`, `Table`, `Column`, types, `table.c`, loading `practice_events` with `COPY` |
+
+Core uses psycopg 3 underneath (`postgresql+psycopg://`).
+
 ## Setup
 
-Needs Docker and Python 3 with psycopg 3.
+Needs Docker and Python 3 with psycopg 3 and SQLAlchemy 2.
 
 1. Create the two secret files next to `docker-compose.yml`, each holding just
    a password. They are not in git; start from the examples:
@@ -35,17 +46,17 @@ Needs Docker and Python 3 with psycopg 3.
    docker compose up -d
    ```
 
-3. Install the driver:
+3. Install the driver and SQLAlchemy:
 
    ```bash
-   pip install "psycopg[binary]"
+   pip install "psycopg[binary]" sqlalchemy
    ```
 
 4. Run a script from inside its stage folder (the scripts read
    `../db_password.txt`, so the working directory matters):
 
    ```bash
-   cd 1-psycopg && python 01_connect.py
+   cd 2-sqlalchemy-core && python 03_tables.py
    ```
 
 The CSV data is not in git. Put the piscine CSVs in `csv/customer/` and
