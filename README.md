@@ -13,7 +13,7 @@ are not in this repo.
 | Stage | Folder | Status |
 | --- | --- | --- |
 | 1. psycopg | [1-psycopg/](1-psycopg/) | done |
-| 2. SQLAlchemy Core | [2-sqlalchemy-core/](2-sqlalchemy-core/) | in progress (phase 4 of 10: create_all and drop_all) |
+| 2. SQLAlchemy Core | [2-sqlalchemy-core/](2-sqlalchemy-core/) | in progress (phase 5 of 10: select) |
 | 3. SQLAlchemy ORM | `3-sqlalchemy-orm/` | not started |
 | 4. Transactions and performance | `4-performance/` | not started |
 | 5. Final project (optional) | `5-project/` | not started |
@@ -25,6 +25,7 @@ are not in this repo.
 | `01_engine.py` | `create_engine`, `URL.create`, the lazy engine |
 | `02_connections.py` | `connect()` vs `begin()`, `Result`, rows |
 | `03_tables.py` | `MetaData`, `Table`, `Column`, types, `table.c`, loading `practice_events` with `COPY` |
+| `04_create.py` | `create_all`, `drop_all`, `table.drop(checkfirst=True)`, why a changed `Column` needs an `ALTER TABLE` |
 
 Core uses psycopg 3 underneath (`postgresql+psycopg://`).
 
